@@ -13,6 +13,7 @@ import (
 func main() {
 	cfg := config.GetConfig()
 	store := core.CreateStore(cfg)
+	defer store.Close()
 
 	routesHandler := router.CreateRouter(store)
 	port := cfg.GetHttpPort()
