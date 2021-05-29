@@ -41,5 +41,5 @@ func (h *RoleHandler) PutRole(c *gin.Context) {
 		log.Fatalf("unable to store role - %s\n", err.Error())
 	}
 
-	c.AbortWithStatus(201)
+	c.AbortWithStatusJSON(201, role)
 }
