@@ -18,6 +18,17 @@ func NewRoleHandler(store shieldwall.Store) *RoleHandler {
 	return &RoleHandler{store: store}
 }
 
+// @Router /v1/roles/{id} [get]
+func (h *RoleHandler) GetRole(c *gin.Context) {
+	id := c.Param("id")
+	role, err := h.store.GetRole(id)
+	if err != nil {
+		log.Fatalf("unable to get role - %s\n", err.Error())
+	}
+
+	c.AbortWithStatusJSON(200, role)
+}
+
 // @Router /v1/roles/{id} [put]
 func (h *RoleHandler) PutRole(c *gin.Context) {
 	var bodyBytes []byte
