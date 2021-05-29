@@ -26,7 +26,7 @@ func (h *RoleHandler) PutRole(c *gin.Context) {
 	}
 
 	var body = struct {
-		Namespaces []string
+		Namespaces []string `json:"namespaces"`
 	}{}
 
 	err := json.Unmarshal(bodyBytes, &body)
@@ -35,9 +35,11 @@ func (h *RoleHandler) PutRole(c *gin.Context) {
 		return
 	}
 
-	role := shieldwall.Role{Id: c.Param("roleId"), Namespaces: body.Namespaces}
+	role := shieldwall.Role{Id: c.Param("id"), Namespaces: body.Namespaces}
 	err = h.store.PutRole(role)
 	if err != nil {
 		log.Fatalf("unable to store role - %s\n", err.Error())
 	}
+
+	c.AbortWithStatus(201)
 }

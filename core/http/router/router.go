@@ -14,7 +14,7 @@ func CreateRouter(store shieldwall.Store) *gin.Engine {
 
 	r.GET("/__health", v1.GetHealth)
 
-	r.GET("/v1/roles/{id}", roleHandler.PutRole)
+	r.PUT("/v1/roles/:id", roleHandler.PutRole)
 
 	return r
 }

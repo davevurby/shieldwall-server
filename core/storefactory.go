@@ -17,6 +17,11 @@ func CreateStore(cfg *config.Config) shieldwall.Store {
 			log.Fatalf("connection to postgres failed - %s\n", err.Error())
 		}
 
+		err = store.RunMigrations()
+		if err != nil {
+			log.Fatalf("postgres migrations failed - %s\n", err.Error())
+		}
+
 		return store
 
 	} else {
