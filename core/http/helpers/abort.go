@@ -9,3 +9,11 @@ func AbortNamespacesInvalid(c *gin.Context) {
 		Message: "namespaces are invalid",
 	})
 }
+
+func AbortRoleNotFound(c *gin.Context) {
+	c.AbortWithStatusJSON(404, struct {
+		Message string `json:"message"`
+	}{
+		Message: "role not found",
+	})
+}

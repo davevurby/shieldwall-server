@@ -26,6 +26,11 @@ func (h *RoleHandler) GetRole(c *gin.Context) {
 		log.Fatalf("unable to get role - %s\n", err.Error())
 	}
 
+	if role == nil {
+		helpers.AbortRoleNotFound(c)
+		return
+	}
+
 	c.AbortWithStatusJSON(200, role)
 }
 
